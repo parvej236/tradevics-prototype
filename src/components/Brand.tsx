@@ -1,4 +1,3 @@
-import { ShieldCheck } from 'lucide-react';
 import { useApp } from '@/lib/app-context';
 import { t } from '@/lib/i18n';
 
@@ -25,14 +24,8 @@ export function Logo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
   );
 }
 
-export function AIBadge({ className = '' }: { className?: string }) {
-  const { lang } = useApp();
-  return (
-    <span className={`chip bg-teal-50 text-teal-700 border border-teal-200 ${className}`}>
-      <ShieldCheck className="w-3 h-3" />
-      {t('aiGuard', lang)}
-    </span>
-  );
+export function AIBadge(_props: { className?: string } = {}) {
+  return null;
 }
 
 export function LangToggle() {

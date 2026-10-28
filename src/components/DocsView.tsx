@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { UploadCloud, FileCheck2, AlertTriangle, FileText, X, Paperclip, AlertCircle, Check, ShieldCheck } from 'lucide-react';
 import { useApp } from '@/lib/app-context';
-import { AIBadge } from './Brand';
 import { PageHeader } from './ui';
 import { seedDocs, discrepancies, type DocKind } from '@/lib/data';
 
@@ -37,11 +36,10 @@ export function DocsView() {
   };
 
   return (
-    <div className="px-6 py-6 max-w-6xl mx-auto">
+    <div className="px-3 sm:px-6 py-4 sm:py-6 max-w-6xl mx-auto">
       <PageHeader
         title={lang === 'en' ? 'Document Upload & Cross-Check' : 'ডকুমেন্ট আপলোড ও ক্রস-চেক'}
         subtitle={lang === 'en' ? 'Drop BOE, Invoice, LC — structured extraction & discrepancy engine' : 'বিওই, ইনভয়েস, এলসি — স্ট্রাকচার্ড এক্সট্র্যাকশন ও অমিল ইঞ্জিন'}
-        action={<AIBadge />}
       />
 
       {/* Dropzone */}
@@ -49,14 +47,14 @@ export function DocsView() {
         onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
         onDragLeave={() => setDragOver(false)}
         onDrop={(e) => { e.preventDefault(); setDragOver(false); addMock('BOE'); }}
-        className={`rounded-2xl border-2 border-dashed p-10 text-center transition cursor-pointer ${dragOver ? 'border-teal-500 bg-teal-50/50' : 'border-ink-300 bg-white hover:border-teal-400'}`}
+        className={`rounded-2xl border-2 border-dashed p-6 sm:p-10 text-center transition cursor-pointer ${dragOver ? 'border-teal-500 bg-teal-50/50' : 'border-ink-300 bg-white hover:border-teal-400'}`}
         onClick={() => addMock('BOE')}
       >
-        <div className="w-14 h-14 rounded-2xl bg-ink-900 text-white grid place-items-center mx-auto">
-          <UploadCloud className="w-7 h-7" />
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-ink-900 text-white grid place-items-center mx-auto">
+          <UploadCloud className="w-6 h-6 sm:w-7 sm:h-7" />
         </div>
-        <h3 className="mt-4 text-base font-semibold text-ink-900">{lang === 'en' ? 'Drag documents here' : 'ডকুমেন্ট এখানে টেনে আনুন'}</h3>
-        <p className="mt-1 text-sm text-ink-500">{lang === 'en' ? 'PDF, JPG, PNG · Bill of Entry, Invoice, LC' : 'PDF, JPG, PNG · বিল অফ এন্ট্রি, ইনভয়েস, এলসি'}</p>
+        <h3 className="mt-3.5 sm:mt-4 text-sm sm:text-base font-semibold text-ink-900">{lang === 'en' ? 'Drag documents here' : 'ডকুমেন্ট এখানে টেনে আনুন'}</h3>
+        <p className="mt-1 text-xs sm:text-sm text-ink-500">{lang === 'en' ? 'PDF, JPG, PNG · Bill of Entry, Invoice, LC' : 'PDF, JPG, PNG · বিল অফ এন্ট্রি, ইনভয়েস, এলসি'}</p>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           {(['BOE', 'Invoice', 'LC'] as DocKind[]).map((k) => (
             <button key={k} onClick={(e) => { e.stopPropagation(); addMock(k); }} className={`chip border ${kindColor[k]} hover:brightness-95`}>
@@ -67,7 +65,7 @@ export function DocsView() {
       </div>
 
       {/* Extraction cards */}
-      <div className="mt-8 grid md:grid-cols-3 gap-4">
+      <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
         {docs.map((d) => (
           <div key={d.id} className="card overflow-hidden animate-fade-up">
             <div className="flex items-center justify-between px-4 py-3 border-b border-ink-100 bg-ink-50/50">
@@ -79,7 +77,7 @@ export function DocsView() {
             </div>
             <div className="p-4 space-y-2.5">
               {d.fields.map((f) => (
-                <div key={f.label} className="flex items-center justify-between text-sm">
+                <div key={f.label} className="flex items-center justify-between text-xs sm:text-sm">
                   <span className="text-ink-500">{f.label}</span>
                   <span className={`flex items-center gap-1.5 font-medium ${f.flag === 'mismatch' ? 'text-status-danger' : f.flag === 'warn' ? 'text-status-warn' : 'text-ink-900'}`}>
                     {f.flag === 'mismatch' && <AlertCircle className="w-3.5 h-3.5" />}
@@ -98,49 +96,54 @@ export function DocsView() {
       </div>
 
       {/* Anomaly alert */}
-      <div className="mt-6 rounded-xl border border-status-danger/20 bg-gradient-to-r from-status-dangerSoft to-white p-5 flex items-start gap-4">
-        <div className="w-10 h-10 rounded-lg bg-status-danger text-white grid place-items-center shrink-0">
-          <AlertTriangle className="w-5 h-5" />
+      <div className="mt-5 sm:mt-6 rounded-xl border border-status-danger/20 bg-gradient-to-r from-status-dangerSoft to-white p-4 sm:p-5 flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+        <div className="flex items-start gap-3 w-full sm:w-auto">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-status-danger text-white grid place-items-center shrink-0">
+            <AlertTriangle className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0 sm:hidden">
+            <h4 className="text-sm font-bold text-ink-900">{lang === 'en' ? 'Anomaly detected' : 'অস্বাভাবিকতা শনাক্ত'}</h4>
+          </div>
         </div>
         <div className="flex-1">
-          <h4 className="text-sm font-bold text-ink-900">{lang === 'en' ? 'Anomaly detected' : 'অস্বাভাবিকতা শনাক্ত'}</h4>
-          <p className="mt-1 text-sm text-ink-700">
+          <h4 className="text-sm font-bold text-ink-900 hidden sm:block">{lang === 'en' ? 'Anomaly detected' : 'অস্বাভাবিকতা শনাক্ত'}</h4>
+          <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm text-ink-700 leading-relaxed">
             {lang === 'en' ? 'Declared value 9% below benchmark (USD 1,180/MT). ' : 'ঘোষিত মূল্য বেঞ্চমার্কের ৯% নিচে (USD 1,180/MT)。'}
             <span className="font-semibold">{lang === 'en' ? 'Likely to trigger a value query under s.32.' : 's.32 অনুযায়ী ভ্যালু কোয়েরি ট্রিগার হতে পারে।'}</span>
           </p>
         </div>
-        <button onClick={() => setJustifyOpen('dp2')} className="btn-outline text-status-danger border-status-danger/30 hover:bg-status-dangerSoft px-4 py-2 shrink-0">
+        <button onClick={() => setJustifyOpen('dp2')} className="w-full sm:w-auto btn-outline text-status-danger border-status-danger/30 hover:bg-status-dangerSoft px-4 py-2 shrink-0 text-xs sm:text-sm">
           {lang === 'en' ? 'Attach justification' : 'জবাবিয়া সংযুক্ত করুন'}
         </button>
       </div>
 
       {/* Discrepancy table */}
-      <div className="mt-8 card overflow-hidden">
-        <div className="px-5 py-4 border-b border-ink-100 flex items-center justify-between">
+      <div className="mt-6 sm:mt-8 card overflow-hidden">
+        <div className="px-4 sm:px-5 py-3.5 sm:py-4 border-b border-ink-100 flex items-center justify-between">
           <h3 className="text-sm font-bold text-ink-900">{lang === 'en' ? 'Discrepancy table' : 'অমিল ছক'}</h3>
           <span className="chip bg-status-dangerSoft text-status-danger">{discrepancies.length} {lang === 'en' ? 'issues' : 'সমস্যা'}</span>
         </div>
         <div className="overflow-x-auto scrollbar-thin">
-          <table className="w-full text-sm">
+          <table className="w-full text-sm min-w-[560px]">
             <thead>
               <tr className="text-left text-[11px] uppercase tracking-wide text-ink-400 bg-ink-50/50">
-                <th className="px-5 py-3 font-semibold">{lang === 'en' ? 'Severity' : 'গুরুত্ব'}</th>
-                <th className="px-5 py-3 font-semibold">{lang === 'en' ? 'Field' : 'ক্ষেত্র'}</th>
-                <th className="px-5 py-3 font-semibold">Bill of Entry</th>
-                <th className="px-5 py-3 font-semibold">Invoice</th>
-                <th className="px-5 py-3 font-semibold">{lang === 'en' ? 'Note' : 'নোট'}</th>
+                <th className="px-4 sm:px-5 py-3 font-semibold">{lang === 'en' ? 'Severity' : 'গুরুত্ব'}</th>
+                <th className="px-4 sm:px-5 py-3 font-semibold">{lang === 'en' ? 'Field' : 'ক্ষেত্র'}</th>
+                <th className="px-4 sm:px-5 py-3 font-semibold">Bill of Entry</th>
+                <th className="px-4 sm:px-5 py-3 font-semibold">Invoice</th>
+                <th className="px-4 sm:px-5 py-3 font-semibold">{lang === 'en' ? 'Note' : 'নোট'}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-ink-100">
               {discrepancies.map((d) => (
                 <tr key={d.id} className="hover:bg-ink-50/50 transition">
-                  <td className="px-5 py-3.5">
+                  <td className="px-4 sm:px-5 py-3 sm:py-3.5">
                     <span className={`chip border capitalize ${sevColor[d.severity]}`}>{d.severity}</span>
                   </td>
-                  <td className="px-5 py-3.5 font-medium text-ink-900">{d.field}</td>
-                  <td className="px-5 py-3.5 text-ink-700 font-mono text-xs">{d.boe}</td>
-                  <td className="px-5 py-3.5 text-ink-700 font-mono text-xs">{d.invoice}</td>
-                  <td className="px-5 py-3.5 text-ink-600 text-xs leading-relaxed max-w-xs">{d.note}</td>
+                  <td className="px-4 sm:px-5 py-3 sm:py-3.5 font-medium text-ink-900">{d.field}</td>
+                  <td className="px-4 sm:px-5 py-3 sm:py-3.5 text-ink-700 font-mono text-xs">{d.boe}</td>
+                  <td className="px-4 sm:px-5 py-3 sm:py-3.5 text-ink-700 font-mono text-xs">{d.invoice}</td>
+                  <td className="px-4 sm:px-5 py-3 sm:py-3.5 text-ink-600 text-xs leading-relaxed max-w-xs">{d.note}</td>
                 </tr>
               ))}
             </tbody>
@@ -150,8 +153,8 @@ export function DocsView() {
 
       {/* Justification modal */}
       {justifyOpen && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-ink-950/40 backdrop-blur-sm p-4" onClick={() => setJustifyOpen(null)}>
-          <div className="w-full max-w-lg card p-6 animate-fade-up" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 grid place-items-center bg-ink-950/40 backdrop-blur-sm p-3.5 sm:p-4" onClick={() => setJustifyOpen(null)}>
+          <div className="w-full max-w-lg card p-4 sm:p-6 animate-fade-up max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-status-warnSoft text-status-warn grid place-items-center"><ShieldCheck className="w-5 h-5" /></div>

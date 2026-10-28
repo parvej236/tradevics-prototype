@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ArrowRight, ShieldCheck, FileCheck2, Calculator, GraduationCap, MessageSquare, FileText, ScanLine, Sparkles, Smartphone, KeyRound, Fingerprint, Check } from 'lucide-react';
 import { useApp } from '@/lib/app-context';
 import { t } from '@/lib/i18n';
-import { Logo, AIBadge, LangToggle } from './Brand';
+import { Logo, LangToggle } from './Brand';
 
 export function Landing() {
   const { lang, setRoute } = useApp();
@@ -10,12 +10,12 @@ export function Landing() {
     <div className="min-h-screen bg-white">
       {/* Nav */}
       <header className="sticky top-0 z-30 border-b border-ink-100 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
-          <Logo />
-          <div className="flex items-center gap-2 md:gap-3">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-5 py-3 sm:py-3.5">
+          <Logo size="sm" />
+          <div className="flex items-center gap-1.5 sm:gap-3">
             <LangToggle />
-            <button onClick={() => setRoute('auth')} className="btn-ghost">{t('signIn', lang)}</button>
-            <button onClick={() => setRoute('auth')} className="btn-primary">{t('getStarted', lang)} <ArrowRight className="w-4 h-4" /></button>
+            <button onClick={() => setRoute('auth')} className="btn-ghost text-xs sm:text-sm px-2.5 sm:px-3 py-1.5">{t('signIn', lang)}</button>
+            <button onClick={() => setRoute('auth')} className="btn-primary text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">{t('getStarted', lang)} <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" /></button>
           </div>
         </div>
       </header>
@@ -25,34 +25,27 @@ export function Landing() {
         <div className="absolute inset-0 grid-bg opacity-60" />
         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-teal-500/10 blur-3xl" />
         <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-ink-900/5 blur-3xl" />
-        <div className="relative mx-auto max-w-6xl px-5 pt-20 pb-24 text-center">
-          <div className="flex justify-center mb-6">
-            <span className="chip bg-white border border-ink-200 text-ink-600 shadow-card">
-              <Sparkles className="w-3.5 h-3.5 text-teal-500" />
-              {lang === 'en' ? 'NBR-aligned · Built for Bangladesh' : 'এনবিআর-সংযুক্ত · বাংলাদেশের জন্য'}
-            </span>
-          </div>
-          <h1 className="mx-auto max-w-3xl text-4xl md:text-6xl font-extrabold tracking-tight text-ink-900 leading-[1.05]">
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-5 pt-12 sm:pt-20 pb-16 sm:pb-24 text-center">
+          <h1 className="mx-auto max-w-3xl text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-ink-900 leading-[1.1] sm:leading-[1.05]">
             {lang === 'en' ? (
               <>The AI legal engine for <span className="text-teal-600">Customs, VAT & Tax</span> professionals.</>
             ) : (
               <>কাস্টমস, ভ্যাট ও ট্যাক্স পেশাদারদের জন্য <span className="text-teal-600">এআই আইনি ইঞ্জিন।</span></>
             )}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-ink-500 leading-relaxed">
+          <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg text-ink-500 leading-relaxed">
             {lang === 'en'
               ? 'Citations from live SROs, deterministic tax ledgers, document cross-checks, and an academy to upskill your team — one platform.'
               : 'লাইভ এসআরও থেকে উদ্ধৃতি, নির্ধারিত ট্যাক্স লেজার, ডকুমেন্ট ক্রস-চেক, এবং দলের দক্ষতা বাড়াতে একাডেমি — একই প্ল্যাটফর্ম।'}
           </p>
-          <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <button onClick={() => setRoute('auth')} className="btn-primary px-6 py-3 text-base">
+          <div className="mt-8 sm:mt-9 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-xs sm:max-w-none mx-auto">
+            <button onClick={() => setRoute('auth')} className="btn-primary px-6 py-3 text-base justify-center">
               {t('getStarted', lang)} <ArrowRight className="w-4 h-4" />
             </button>
-            <button onClick={() => setRoute('auth')} className="btn-outline px-6 py-3 text-base">
+            <button onClick={() => setRoute('auth')} className="btn-outline px-6 py-3 text-base justify-center">
               {t('signIn', lang)}
             </button>
           </div>
-          <div className="mt-6 flex justify-center"><AIBadge /></div>
         </div>
       </section>
 
@@ -191,7 +184,6 @@ export function Auth() {
               ? 'Tradevics uses passwordless authentication aligned with NIST 800-63B. Faster sign-in, stronger security.'
               : 'ট্রেডভিক্স NIST 800-63B অনুযায়ী পাসওয়ার্ডলেস প্রমাণীকরণ ব্যবহার করে। দ্রুত সাইন-ইন, শক্তিশালী নিরাপত্তা।'}
           </p>
-          <div className="mt-8 flex gap-3"><AIBadge /></div>
         </div>
         <div className="relative flex items-center gap-3 text-ink-300 text-sm">
           <ShieldCheck className="w-5 h-5 text-teal-400" />
@@ -238,9 +230,9 @@ export function Auth() {
             {step === 1 && (
               <>
                 <label className="label">{lang === 'en' ? '6-digit code' : '৬-সংখ্যার কোড'}</label>
-                <div className="flex gap-2 justify-between">
+                <div className="flex gap-1.5 sm:gap-2 justify-between">
                   {[4,8,2,1,0,7].map((d, i) => (
-                    <div key={i} className="w-11 h-13 rounded-lg border border-ink-300 bg-white grid place-items-center text-xl font-bold text-ink-900 py-3" style={{ animationDelay: `${i*0.1}s` }}>{d}</div>
+                    <div key={i} className="flex-1 max-w-[48px] h-12 sm:h-13 rounded-lg border border-ink-300 bg-white grid place-items-center text-lg sm:text-xl font-bold text-ink-900 py-2 sm:py-3" style={{ animationDelay: `${i*0.1}s` }}>{d}</div>
                   ))}
                 </div>
                 <p className="mt-3 text-xs text-ink-500">{lang === 'en' ? 'Code expires in 04:58 ·' : 'কোড ০৪:৫৮ শেষ ·'} <button className="text-teal-600 font-semibold" onClick={() => setStep(0)}>{lang === 'en' ? 'resend' : 'পুনঃপ্রেরণ'}</button></p>

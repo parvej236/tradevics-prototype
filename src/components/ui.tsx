@@ -33,13 +33,13 @@ export function CitationChip({ id }: { id: string }) {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-full z-50 mt-2 w-80 rounded-xl border border-ink-200 bg-white p-4 shadow-float animate-fade-up">
+          <div className="absolute left-0 top-full z-50 mt-2 w-72 sm:w-80 max-w-[calc(100vw-2.5rem)] rounded-xl border border-ink-200 bg-white p-4 shadow-float animate-fade-up">
             <div className="flex items-center gap-2">
               <Icon className="w-4 h-4 text-ink-500" />
               <div className="text-xs font-bold uppercase tracking-wide text-ink-400">{c.kind}</div>
             </div>
-            <div className="mt-1.5 text-sm font-semibold text-ink-900">{c.title}</div>
-            <p className="mt-2 text-xs leading-relaxed text-ink-600 border-l-2 border-teal-300 pl-3 italic">
+            <div className="mt-1.5 text-sm font-semibold text-ink-900 break-words">{c.title}</div>
+            <p className="mt-2 text-xs leading-relaxed text-ink-600 border-l-2 border-teal-300 pl-3 italic break-words">
               {c.text}
             </p>
             <button className="mt-3 text-xs font-semibold text-teal-600 hover:text-teal-700">
@@ -65,12 +65,12 @@ export function StatusPill({ status }: { status: 'ok' | 'warn' | 'danger' | 'inf
 
 export function PageHeader({ title, subtitle, action }: { title: string; subtitle?: string; action?: ReactNode }) {
   return (
-    <div className="flex items-start justify-between gap-4 mb-6">
-      <div>
-        <h1 className="text-2xl font-bold text-ink-900 tracking-tight">{title}</h1>
-        {subtitle && <p className="mt-1 text-sm text-ink-500">{subtitle}</p>}
+    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
+      <div className="min-w-0 flex-1">
+        <h1 className="text-xl sm:text-2xl font-bold text-ink-900 tracking-tight leading-snug">{title}</h1>
+        {subtitle && <p className="mt-1 text-xs sm:text-sm text-ink-500 leading-relaxed">{subtitle}</p>}
       </div>
-      {action}
+      {action && <div className="shrink-0 flex items-center gap-2 self-start sm:self-auto">{action}</div>}
     </div>
   );
 }

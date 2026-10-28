@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Award, BookOpen, Check, Clock, Scale, ShieldCheck, Star, Users } from 'lucide-react';
 import { useApp } from '@/lib/app-context';
-import { AIBadge } from './Brand';
 import { PageHeader } from './ui';
 import { bdt } from '@/lib/i18n';
 import type { Lang } from '@/lib/i18n';
@@ -92,25 +91,24 @@ export function CoursesView() {
   const [purchased, setPurchased] = useState<Record<string, boolean>>({});
 
   return (
-    <div className="px-6 py-6 max-w-6xl mx-auto">
+    <div className="px-3 sm:px-6 py-4 sm:py-6 max-w-6xl mx-auto">
       <PageHeader
         title={lang === 'en' ? 'Browse Courses' : 'কোর্স দেখুন'}
         subtitle={lang === 'en' ? 'Buy individual courses — lifetime access, no subscription' : 'আলাদাভাবে কোর্স কিনুন — লাইফটাইম অ্যাক্সেস, সাবস্ক্রিপশন নেই'}
-        action={<AIBadge />}
       />
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {courses.map((c) => {
           const bought = purchased[c.id];
           return (
-            <div key={c.id} className="card p-5 flex flex-col">
+            <div key={c.id} className="card p-4 sm:p-5 flex flex-col">
               <div className="flex items-center justify-between">
-                <div className="w-11 h-11 rounded-lg bg-ink-900 text-white grid place-items-center">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-ink-900 text-white grid place-items-center">
                   <c.icon className="w-5 h-5" />
                 </div>
                 <span className="chip bg-teal-50 text-teal-700 border border-teal-200">{c.tag[lang as Lang]}</span>
               </div>
-              <h3 className="mt-4 text-sm font-bold text-ink-900 leading-snug">{c.title[lang as Lang]}</h3>
+              <h3 className="mt-3.5 sm:mt-4 text-sm font-bold text-ink-900 leading-snug">{c.title[lang as Lang]}</h3>
               <p className="mt-1 text-xs text-ink-500">{c.tutor} · {c.level[lang as Lang]}</p>
 
               <div className="mt-3 flex items-center gap-3 text-xs text-ink-500">
@@ -119,7 +117,7 @@ export function CoursesView() {
                 <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5" /> {c.students}</span>
               </div>
 
-              <ul className="mt-4 space-y-2 flex-1">
+              <ul className="mt-3.5 sm:mt-4 space-y-2 flex-1">
                 {c.features[lang as Lang].map((f) => (
                   <li key={f} className="flex items-start gap-2 text-xs text-ink-700">
                     <Check className="w-3.5 h-3.5 text-teal-500 shrink-0 mt-0.5" /> {f}
@@ -128,14 +126,14 @@ export function CoursesView() {
               </ul>
 
               <div className="mt-4 flex items-center justify-between">
-                <span className="text-lg font-extrabold text-ink-900">{bdt(c.price, lang as Lang)}</span>
+                <span className="text-base sm:text-lg font-extrabold text-ink-900">{bdt(c.price, lang as Lang)}</span>
                 <span className="text-[10px] text-ink-400">{lang === 'en' ? 'one-time' : 'এককালীন'}</span>
               </div>
 
               <button
                 onClick={() => setPurchased((p) => ({ ...p, [c.id]: true }))}
                 disabled={bought}
-                className={`mt-3 w-full ${bought ? 'btn-outline text-status-success border-status-success/30' : 'btn-primary'}`}
+                className={`mt-3 w-full text-xs sm:text-sm py-2 sm:py-2.5 ${bought ? 'btn-outline text-status-success border-status-success/30' : 'btn-primary'}`}
               >
                 {bought ? <><Check className="w-4 h-4" /> {lang === 'en' ? 'Purchased' : 'ক্রয় সম্পন্ন'}</> : (lang === 'en' ? 'Buy course' : 'কোর্স কিনুন')}
               </button>

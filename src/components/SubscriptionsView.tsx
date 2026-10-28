@@ -1,6 +1,5 @@
 import { Check, Scale, GraduationCap, Sparkles } from 'lucide-react';
 import { useApp } from '@/lib/app-context';
-import { AIBadge } from './Brand';
 import { PageHeader } from './ui';
 
 type Plan = {
@@ -62,43 +61,42 @@ export function SubscriptionsView() {
   const { lang, setRoute } = useApp();
 
   return (
-    <div className="px-6 py-6 max-w-6xl mx-auto">
+    <div className="px-3 sm:px-6 py-4 sm:py-6 max-w-6xl mx-auto">
       <PageHeader
         title={lang === 'en' ? 'Subscriptions' : 'সাবস্ক্রিপশন'}
         subtitle={lang === 'en' ? 'Choose the plan that fits your workspace' : 'আপনার ওয়ার্কস্পেসের জন্য উপযুক্ত প্ল্যান বেছে নিন'}
-        action={<AIBadge />}
       />
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {plans.map((p) => (
           <div
             key={p.id}
-            className={`card p-6 flex flex-col ${p.highlight ? 'ring-2 ring-teal-500/30 border-teal-400' : ''}`}
+            className={`card p-4 sm:p-6 flex flex-col ${p.highlight ? 'ring-2 ring-teal-500/30 border-teal-400' : ''}`}
           >
             {p.highlight && (
               <span className="chip bg-teal-50 text-teal-700 border border-teal-200 self-start mb-3">
                 {lang === 'en' ? 'Most popular' : 'সবচেয়ে জনপ্রিয়'}
               </span>
             )}
-            <div className="w-11 h-11 rounded-lg bg-ink-900 text-white grid place-items-center">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-ink-900 text-white grid place-items-center">
               <p.icon className="w-5 h-5" />
             </div>
-            <h3 className="mt-4 text-lg font-bold text-ink-900">{p.name[lang]}</h3>
+            <h3 className="mt-3.5 sm:mt-4 text-base sm:text-lg font-bold text-ink-900">{p.name[lang]}</h3>
             <p className="mt-1 text-xs text-ink-500 leading-relaxed">{p.tagline[lang]}</p>
-            <div className="mt-4 flex items-baseline gap-1">
-              <span className="text-2xl font-extrabold text-ink-900">{p.price[lang]}</span>
+            <div className="mt-3.5 sm:mt-4 flex items-baseline gap-1">
+              <span className="text-xl sm:text-2xl font-extrabold text-ink-900">{p.price[lang]}</span>
               <span className="text-xs text-ink-400">{p.period[lang]}</span>
             </div>
-            <ul className="mt-5 space-y-2.5 flex-1">
+            <ul className="mt-4 sm:mt-5 space-y-2 sm:space-y-2.5 flex-1">
               {p.features[lang].map((f) => (
-                <li key={f} className="flex items-start gap-2 text-sm text-ink-700">
-                  <Check className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> {f}
+                <li key={f} className="flex items-start gap-2 text-xs sm:text-sm text-ink-700">
+                  <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-500 shrink-0 mt-0.5" /> {f}
                 </li>
               ))}
             </ul>
             <button
               onClick={() => p.id === 'ai-learning' && setRoute('courses')}
-              className={`mt-6 w-full ${p.highlight ? 'btn-primary' : 'btn-outline'}`}
+              className={`mt-5 sm:mt-6 w-full text-xs sm:text-sm py-2 sm:py-2.5 ${p.highlight ? 'btn-primary' : 'btn-outline'}`}
             >
               {p.cta[lang]}
             </button>

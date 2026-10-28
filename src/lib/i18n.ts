@@ -16,7 +16,7 @@ export const dict = {
   subscriptions: { en: 'Subscriptions', bn: 'সাবস্ক্রিপশন' },
   courses: { en: 'Browse Courses', bn: 'কোর্স দেখুন' },
   // badge
-  aiGuard: { en: 'AI-generated · guardrail verified', bn: 'এআই-উৎপাদিত · গার্ডরেইল যাচাইকৃত' },
+  aiGuard: { en: '', bn: '' },
 } as const;
 
 export type Key = keyof typeof dict;
