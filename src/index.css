@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-ink-50 text-ink-900 font-sans;
+  }
+  * {
+    @apply border-ink-200;
+  }
+  ::selection {
+    @apply bg-teal-200 text-ink-900;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white border border-ink-200 rounded-xl shadow-card;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-teal-600 text-white hover:bg-teal-700 active:scale-[0.98] px-4 py-2.5 text-sm;
+  }
+  .btn-ghost {
+    @apply btn text-ink-600 hover:bg-ink-100 hover:text-ink-900 px-3 py-2 text-sm;
+  }
+  .btn-outline {
+    @apply btn border border-ink-300 bg-white text-ink-700 hover:border-ink-400 hover:bg-ink-50 px-4 py-2.5 text-sm;
+  }
+  .input {
+    @apply w-full rounded-lg border border-ink-300 bg-white px-3 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition;
+  }
+  .label {
+    @apply block text-xs font-semibold text-ink-600 mb-1.5 uppercase tracking-wide;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium;
+  }
+  .nav-item {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-ink-600 hover:bg-ink-100 hover:text-ink-900 transition cursor-pointer;
+  }
+  .nav-item-active {
+    @apply bg-teal-50 text-teal-700 hover:bg-teal-50 hover:text-teal-700;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #cfd8e6 transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { @apply bg-ink-200 rounded-full; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,155,133,0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,155,133,0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.dot-bg {
+  background-image: radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
